@@ -10,8 +10,13 @@ This integration is inspired by protocol behavior observed in [`tomikaa87/gree-r
 - AES `pack` payload support for both ECB and GCM devices (auto-detected)
 - Config Flow + Config Entry setup
 - DataUpdateCoordinator polling (default 30s, configurable)
-- Number entity:
+- Number entities:
   - `HeWatOutTemSet` (20..60, step 1)
+  - `WatBoxTemSet` (20..60, step 1)
+- Switch entity:
+  - `Pow` (power on/off)
+- Select entity:
+  - `Mod` (mode selector)
 - Sensor entities (unavailable when missing from device response):
   - `HeWatOutTemSet`
   - `WatBoxTemSet`

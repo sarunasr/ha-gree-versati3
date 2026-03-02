@@ -37,6 +37,19 @@
     "number": {
       "he_wat_out_tem_set": {
         "name": "Heating water outlet setpoint"
+      },
+      "wat_box_tem_set": {
+        "name": "Water box temperature setpoint"
+      }
+    },
+    "switch": {
+      "power_control": {
+        "name": "Power"
+      }
+    },
+    "select": {
+      "mode_control": {
+        "name": "Mode"
       }
     },
     "sensor": {

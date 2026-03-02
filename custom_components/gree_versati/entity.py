@@ -19,11 +19,12 @@ class GreeVersatiEntity(CoordinatorEntity[GreeVersatiCoordinator]):
         coordinator: GreeVersatiCoordinator,
         device_id: str,
         param_key: str,
+        unique_id_key: str | None = None,
     ) -> None:
         super().__init__(coordinator)
         self._device_id = device_id
         self._param_key = param_key
-        self._attr_unique_id = f"{device_id}_{param_key}"
+        self._attr_unique_id = f"{device_id}_{unique_id_key or param_key}"
         self._attr_device_info = DeviceInfo(
             identifiers={(DOMAIN, device_id)},
             name=f"Gree Versati {device_id}",

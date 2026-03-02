@@ -22,6 +22,10 @@ MIN_HE_WAT_OUT_TEMP_SET: Final = 20
 MAX_HE_WAT_OUT_TEMP_SET: Final = 60
 HE_WAT_OUT_TEMP_SET_STEP: Final = 1
 
+MIN_WAT_BOX_TEMP_SET: Final = 20
+MAX_WAT_BOX_TEMP_SET: Final = 60
+WAT_BOX_TEMP_SET_STEP: Final = 1
+
 PARAM_HE_WAT_OUT_TEM_SET: Final = "HeWatOutTemSet"
 PARAM_WAT_BOX_TEM_SET: Final = "WatBoxTemSet"
 PARAM_TEM_UN: Final = "TemUn"
@@ -51,4 +55,17 @@ DATA_ENTRIES: Final = "entries"
 DATA_CLIENT: Final = "client"
 DATA_COORDINATOR: Final = "coordinator"
 
-PLATFORMS: Final[list[Platform]] = [Platform.NUMBER, Platform.SENSOR]
+MODE_OPTIONS: Final[dict[str, int]] = {
+    "Auto": 0,
+    "Heat": 1,
+    "Cool": 2,
+    "DHW": 3,
+    "Heat+DHW": 4,
+}
+
+PLATFORMS: Final[list[Platform]] = [
+    Platform.NUMBER,
+    Platform.SENSOR,
+    Platform.SWITCH,
+    Platform.SELECT,
+]
