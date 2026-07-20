@@ -38,6 +38,9 @@
       "he_wat_out_tem_set": {
         "name": "Heating water outlet setpoint"
       },
+      "co_wat_out_tem_set": {
+        "name": "Cooling water outlet setpoint"
+      },
       "wat_box_tem_set": {
         "name": "Water box temperature setpoint"
       }
@@ -55,6 +58,9 @@
     "sensor": {
       "he_wat_out_tem_set": {
         "name": "Heating water outlet setpoint"
+      },
+      "co_wat_out_tem_set": {
+        "name": "Cooling water outlet setpoint"
       },
       "wat_box_tem_set": {
         "name": "Water box temperature setpoint"

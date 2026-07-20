@@ -14,6 +14,7 @@ from .constants import (
     DATA_COORDINATOR,
     DATA_ENTRIES,
     PARAM_ALL_ERR,
+    PARAM_CO_WAT_OUT_TEM_SET,
     PARAM_HE_WAT_OUT_TEM_SET,
     PARAM_MOD,
     PARAM_POW,
@@ -36,6 +37,11 @@ SENSOR_DESCRIPTIONS: tuple[GreeVersatiSensorDescription, ...] = (
         key="he_wat_out_tem_set",
         translation_key="he_wat_out_tem_set",
         param_key=PARAM_HE_WAT_OUT_TEM_SET,
+    ),
+    GreeVersatiSensorDescription(
+        key="co_wat_out_tem_set",
+        translation_key="co_wat_out_tem_set",
+        param_key=PARAM_CO_WAT_OUT_TEM_SET,
     ),
     GreeVersatiSensorDescription(
         key="wat_box_tem_set",

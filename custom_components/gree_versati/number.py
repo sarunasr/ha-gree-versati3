@@ -10,15 +10,19 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
 from .client import GreeVersatiProtocolClient
 from .constants import (
+    CO_WAT_OUT_TEMP_SET_STEP,
     CONF_DEVICE_ID,
     DATA_CLIENT,
     DATA_COORDINATOR,
     DATA_ENTRIES,
     HE_WAT_OUT_TEMP_SET_STEP,
+    MAX_CO_WAT_OUT_TEMP_SET,
     MAX_HE_WAT_OUT_TEMP_SET,
     MAX_WAT_BOX_TEMP_SET,
+    MIN_CO_WAT_OUT_TEMP_SET,
     MIN_HE_WAT_OUT_TEMP_SET,
     MIN_WAT_BOX_TEMP_SET,
+    PARAM_CO_WAT_OUT_TEM_SET,
     PARAM_HE_WAT_OUT_TEM_SET,
     PARAM_WAT_BOX_TEM_SET,
     WAT_BOX_TEMP_SET_STEP,
@@ -37,6 +41,11 @@ async def async_setup_entry(
     async_add_entities(
         [
             GreeVersatiOutletSetpointNumber(
+                runtime_data[DATA_COORDINATOR],
+                entry.data[CONF_DEVICE_ID],
+                runtime_data[DATA_CLIENT],
+            ),
+            GreeVersatiCoolingSetpointNumber(
                 runtime_data[DATA_COORDINATOR],
                 entry.data[CONF_DEVICE_ID],
                 runtime_data[DATA_CLIENT],
@@ -98,6 +107,23 @@ class GreeVersatiOutletSetpointNumber(GreeVersatiSetpointNumber):
         client: GreeVersatiProtocolClient,
     ) -> None:
         super().__init__(coordinator, device_id, client, PARAM_HE_WAT_OUT_TEM_SET)
+
+
+class GreeVersatiCoolingSetpointNumber(GreeVersatiSetpointNumber):
+    """Number entity for cooling water outlet setpoint."""
+
+    _attr_translation_key = "co_wat_out_tem_set"
+    _attr_native_min_value = MIN_CO_WAT_OUT_TEMP_SET
+    _attr_native_max_value = MAX_CO_WAT_OUT_TEMP_SET
+    _attr_native_step = CO_WAT_OUT_TEMP_SET_STEP
+
+    def __init__(
+        self,
+        coordinator: GreeVersatiCoordinator,
+        device_id: str,
+        client: GreeVersatiProtocolClient,
+    ) -> None:
+        super().__init__(coordinator, device_id, client, PARAM_CO_WAT_OUT_TEM_SET)
 
 
 class GreeVersatiWatBoxSetpointNumber(GreeVersatiSetpointNumber):
