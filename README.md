@@ -13,8 +13,9 @@ This integration is inspired by protocol behavior observed in [`tomikaa87/gree-r
 - Number entities:
   - `HeWatOutTemSet` (20..60, step 1)
   - `WatBoxTemSet` (20..60, step 1)
-- Switch entity:
+- Switch entities:
   - `Pow` (power on/off)
+  - `Quiet` (quiet mode on/off)
 - Select entity:
   - `Mod` (mode selector)
 - Sensor entities (unavailable when missing from device response):

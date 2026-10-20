@@ -48,6 +48,9 @@
     "switch": {
       "power_control": {
         "name": "Power"
+      },
+      "quiet_mode": {
+        "name": "Quiet mode"
       }
     },
     "select": {
@@ -76,6 +79,18 @@
       },
       "pow": {
         "name": "Power"
+      },
+      "wat_box_tem": {
+        "name": "Water box temperature"
+      },
+      "all_out_wat_tem": {
+        "name": "Heating circuit supply temperature"
+      },
+      "all_in_wat_tem": {
+        "name": "Heating circuit return temperature"
+      },
+      "hep_out_wat_tem": {
+        "name": "Heat exchanger outlet temperature"
       }
     }
   }

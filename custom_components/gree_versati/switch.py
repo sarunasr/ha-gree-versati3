@@ -14,6 +14,7 @@ from .constants import (
     DATA_COORDINATOR,
     DATA_ENTRIES,
     PARAM_POW,
+    PARAM_QUIET,
 )
 from .coordinator import GreeVersatiCoordinator
 from .entity import GreeVersatiEntity
@@ -32,7 +33,12 @@ async def async_setup_entry(
                 runtime_data[DATA_COORDINATOR],
                 entry.data[CONF_DEVICE_ID],
                 runtime_data[DATA_CLIENT],
-            )
+            ),
+            GreeVersatiQuietSwitch(
+                runtime_data[DATA_COORDINATOR],
+                entry.data[CONF_DEVICE_ID],
+                runtime_data[DATA_CLIENT],
+            ),
         ]
     )
 
@@ -75,4 +81,50 @@ class GreeVersatiPowerSwitch(GreeVersatiEntity, SwitchEntity):
     async def async_turn_off(self, **kwargs: object) -> None:
         """Turn off power."""
         await self._client.async_set({PARAM_POW: 0})
+        await self.coordinator.async_request_refresh()
+
+
+class GreeVersatiQuietSwitch(GreeVersatiEntity, SwitchEntity):
+    """Quiet mode control switch."""
+
+    _attr_translation_key = "quiet_mode"
+
+    def __init__(
+        self,
+        coordinator: GreeVersatiCoordinator,
+        device_id: str,
+        client: GreeVersatiProtocolClient,
+    ) -> None:
+        super().__init__(
+            coordinator,
+            device_id,
+            PARAM_QUIET,
+            unique_id_key="quiet_switch",
+        )
+        self._client = client
+
+    @property
+    def is_on(self) -> bool | None:
+        """Return switch state."""
+        value = (self.coordinator.data or {}).get(PARAM_QUIET)
+        if value is None:
+            return None
+        try:
+            return bool(int(value))
+        except (TypeError, ValueError):
+            return bool(value)
+
+    @property
+    def icon(self) -> str:
+        """Return icon matching the state."""
+        return "mdi:volume-off" if self.is_on else "mdi:volume-high"
+
+    async def async_turn_on(self, **kwargs: object) -> None:
+        """Turn on quiet mode."""
+        await self._client.async_set({PARAM_QUIET: 1})
+        await self.coordinator.async_request_refresh()
+
+    async def async_turn_off(self, **kwargs: object) -> None:
+        """Turn off quiet mode."""
+        await self._client.async_set({PARAM_QUIET: 0})
         await self.coordinator.async_request_refresh()

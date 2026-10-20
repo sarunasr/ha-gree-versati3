@@ -37,6 +37,14 @@ PARAM_TEM_UN: Final = "TemUn"
 PARAM_ALL_ERR: Final = "AllErr"
 PARAM_MOD: Final = "Mod"
 PARAM_POW: Final = "Pow"
+PARAM_QUIET: Final = "Quiet"
+
+TEMPERATURE_SENSORS: Final[tuple[tuple[str, str, str], ...]] = (
+    ("wat_box_tem", "WatBoxTemHi", "WatBoxTemLo"),
+    ("all_out_wat_tem", "AllOutWatTemHi", "AllOutWatTemLo"),
+    ("all_in_wat_tem", "AllInWatTemHi", "AllInWatTemLo"),
+    ("hep_out_wat_tem", "HepOutWatTemHi", "HepOutWatTemLo"),
+)
 
 POLL_KEYS: Final[tuple[str, ...]] = (
     PARAM_HE_WAT_OUT_TEM_SET,
@@ -46,6 +54,8 @@ POLL_KEYS: Final[tuple[str, ...]] = (
     PARAM_ALL_ERR,
     PARAM_MOD,
     PARAM_POW,
+    PARAM_QUIET,
+    *(key for _, hi_key, lo_key in TEMPERATURE_SENSORS for key in (hi_key, lo_key)),
 )
 
 SERVICE_SET_PARAM: Final = "set_param"
